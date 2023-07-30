@@ -21,7 +21,7 @@ public class AuthorController {
     }
 
     @GetMapping
-    public List<Author> getAllAuthors(){
+    public ResponseEntity<List<Author>> getAllAuthors(){
         return authorService.getAllAuthors();
     }
 
@@ -31,7 +31,7 @@ public class AuthorController {
     }
 
     @PostMapping
-    public Author saveAuthor(@RequestBody AuthorRequest authorRequest){
+    public ResponseEntity<Author> saveAuthor(@RequestBody AuthorRequest authorRequest){
         Author author = new Author(
                 authorRequest.getName(),
                 authorRequest.getImagePath()
@@ -39,9 +39,13 @@ public class AuthorController {
         return authorService.saveAuthor(author);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Author> updateAuthor(@PathVariable int id, @RequestBody AuthorRequest updateRequest){
+        return authorService.updateAuthor(id, updateRequest);
+    }
 
     @DeleteMapping("/{id}")
-    public void deleteAuthor(@PathVariable int id){
-        authorService.deleteAuthor(id);
+    public ResponseEntity<Void> deleteAuthor(@PathVariable int id){
+        return authorService.deleteAuthor(id);
     }
 }
