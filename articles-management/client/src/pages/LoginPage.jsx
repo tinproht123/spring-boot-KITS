@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+/* eslint-disable react/no-unescaped-entities */
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { login } from "../store/features/authSlice";
 import { toast } from "react-toastify";
@@ -11,7 +12,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const isLogin = useSelector((state) => state.auth.isLogin);
+  const isLogin = localStorage.getItem("isLogin");
 
   if (isLogin) {
     return <Navigate to="/" replace />;

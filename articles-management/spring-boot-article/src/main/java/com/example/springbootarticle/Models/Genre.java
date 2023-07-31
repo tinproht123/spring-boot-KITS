@@ -25,4 +25,8 @@ public class Genre {
 
     @OneToMany(mappedBy = "genre")
     private Set<Post> posts = new HashSet<>();
+
+    public Genre(String name) {
+        this.name = name;
+    }
 }

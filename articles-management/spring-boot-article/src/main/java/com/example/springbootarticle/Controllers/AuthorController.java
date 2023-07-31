@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/authors")
+@CrossOrigin("*")
 public class AuthorController {
     @Autowired
     private AuthorService authorService;
