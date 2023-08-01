@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { fetchAuthorList } from "../../store/features/authorSlice";
+import {
+  deleteAuthor,
+  fetchAuthorList,
+} from "../../store/features/authorSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -29,8 +32,12 @@ const AuthorPage = () => {
 
   if (isError) {
     toast.error(errMsg);
-    return <div className="text-danger">Error</div>;
   }
+
+  const handleDelete = () => {
+    dispatch(deleteAuthor(deletedId));
+    setDeletedId(null);
+  };
 
   return (
     <div className="container">
@@ -108,7 +115,12 @@ const AuthorPage = () => {
               >
                 Thoát
               </button>
-              <button type="button" className="btn btn-danger">
+              <button
+                type="button"
+                className="btn btn-danger"
+                data-bs-dismiss="modal"
+                onClick={handleDelete}
+              >
                 Xóa
               </button>
             </div>

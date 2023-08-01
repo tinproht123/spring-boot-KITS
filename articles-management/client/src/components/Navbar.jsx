@@ -1,12 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { logout } from "../store/features/authSlice";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const navLinkStyle = ({ isActive }) => ({
     fontWeight: isActive && "700",
   });
-
-  const isLogin = localStorage.getItem("isLogin");
+  let isLogin = localStorage.getItem("isLogin");
+  const dispatch = useDispatch();
 
   return (
     <div className="navbar navbar-expand-lg navbar-light bg-light shadow shadow-lg">
@@ -63,6 +67,18 @@ const Navbar = () => {
             )}
           </ul>
           <form className="d-flex justify-content-end">
+            {isLogin && (
+              <button
+                className="btn text-danger"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  dispatch(logout());
+                  toast.success("Logout successfully!");
+                }}
+              >
+                Logout
+              </button>
+            )}
             <div className="input-group">
               <input
                 className="form-control rounded text-dark"
